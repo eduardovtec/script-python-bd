@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, WebDriverException
+from webdriver_manager.chrome import ChromeDriverManager
 import os
 
 db_config = {
@@ -45,13 +46,13 @@ def insert_to_database(data):
             conn.close()
 
 
-# Configurar opções do Chrome
 chrome_options = Options()
-chrome_options.add_argument("--headless")  
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+
 
 def setup_page():
     """Configura a página com 120 itens por página"""
@@ -149,4 +150,5 @@ for ticker in tickers:
 if preco_dados:
     insert_to_database(preco_dados)
 else:
+
     print("Nenhum dado válido para inserir no banco.")
