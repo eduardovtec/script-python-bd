@@ -10,14 +10,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, WebDriverException
+import os
 
-
-# Configuração do banco
 db_config = {
-    'host': '127.0.0.1',
-    'database': 'b3',
-    'user': 'root',
-    'password': 'vtecdohcek9'
+    'host': os.getenv("DB_HOST", "finova.cpq2eyquwawb.sa-east-1.rds.amazonaws.com"),
+    'database': os.getenv("DB_NAME", "b3"),
+    'user': os.getenv("DB_USER", "admin"),
+    'password': os.getenv("DB_PASS", "")
 }
 
 def insert_to_database(data):
