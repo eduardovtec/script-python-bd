@@ -2,7 +2,7 @@ name: Run script every 15 minutes
 
 on:
   schedule:
-    - cron: "*/3 10-17 * * *"
+    - cron: "*/5 10-17 * * 1-5"
   workflow_dispatch:
 
 jobs:
